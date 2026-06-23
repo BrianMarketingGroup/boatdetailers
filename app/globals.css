@@ -2,19 +2,19 @@
 
 @theme {
   /* Colors */
-  --color-navy: #2D2D2D;
-  --color-navy-light: #3D3D3D;
-  --color-navy-dark: #1A1A1A;
-  --color-teal: #2563EB;
-  --color-teal-light: #60A5FA;
-  --color-teal-dark: #1D4ED8;
-  --color-sky: #EFF6FF;
-  --color-sky-dark: #DBEAFE;
-  --color-dark: #1A2436;
-  --color-muted: #5A6B7E;
-  --color-gold: #C9A961;
-  --color-gold-light: #D9BF85;
-  --color-gold-dark: #A8873A;
+  --color-navy: #0D2B45;
+  --color-navy-light: #163C5A;
+  --color-navy-dark: #071B30;
+  --color-teal: #0EA5E9;
+  --color-teal-light: #38BDF8;
+  --color-teal-dark: #0284C7;
+  --color-sky: #E0F4FB;
+  --color-sky-dark: #BFE8F7;
+  --color-dark: #0A1E35;
+  --color-muted: #3A6680;
+  --color-gold: #F5C518;
+  --color-gold-light: #F9D94A;
+  --color-gold-dark: #D4A800;
 
   /* Typography */
   --font-display: var(--playfair), Georgia, "Times New Roman", serif;

@@ -1,26 +1,16 @@
 import { z } from "zod";
-import { allLoanProductLabels } from "@/content/loanProducts";
+import { allServiceLabels } from "@/content/services";
 
 export const applySchema = z.object({
   type: z.literal("apply").default("apply"),
 
-  // Step 1: Company Details
-  companyName: z.string().min(2, "Company name is required"),
+  // Step 1: Business Details
+  businessName: z.string().min(2, "Business name is required"),
   website: z.string().optional(),
-  companyPhone: z
+  businessPhone: z
     .string()
     .min(10, "Enter a valid phone number")
     .regex(/^[\d\s\(\)\-\+\.]+$/, "Enter a valid phone number"),
-  nmlsNumber: z.string().optional(),
-  loanOfficers: z
-    .array(
-      z.object({
-        name: z.string().optional(),
-        nmls: z.string().optional(),
-        description: z.string().max(500, "Description too long").optional(),
-      })
-    )
-    .optional(),
   assetPermission: z.enum(["grant", "support"], {
     errorMap: () => ({ message: "Please select an option" }),
   }),
@@ -34,12 +24,12 @@ export const applySchema = z.object({
       })
     )
     .min(1, "Add at least one city"),
-  loanProducts: z
+  services: z
     .array(z.string())
-    .min(1, "Select at least one loan product")
+    .min(1, "Select at least one service")
     .refine(
-      (products) => products.every((p) => allLoanProductLabels.includes(p)),
-      "Invalid loan product"
+      (items) => items.every((s) => allServiceLabels.includes(s)),
+      "Invalid service"
     ),
   featuredPlacement: z.boolean().default(true),
   // "city|state" keys the user has opted out of featured placement
@@ -54,10 +44,6 @@ export const applySchema = z.object({
     .min(10, "Enter a valid phone number")
     .regex(/^[\d\s\(\)\-\+\.]+$/, "Enter a valid phone number"),
   contactTitle: z.string().optional(),
-  plaqueShippingAddress: z.string().min(5, "Shipping address is required"),
-  plaqueShippingCity: z.string().min(2, "City is required"),
-  plaqueShippingState: z.string().length(2, "Select a state"),
-  plaqueShippingZip: z.string().regex(/^\d{5}(-\d{4})?$/, "Enter a valid ZIP code"),
   notes: z.string().max(1000).optional(),
 
   // Step 4: Billing Details

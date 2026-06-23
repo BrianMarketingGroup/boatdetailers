@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Home, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 import Container from "@/components/Container";
 
 export const metadata: Metadata = {
@@ -19,12 +20,12 @@ export default function ThanksPage() {
             Application Received!
           </h1>
           <p className="text-muted text-lg leading-relaxed mb-8">
-            Thank you for applying to TopMortgageCompanies.com. If we need anything to finalize your listing, we&apos;ll reach out. In the meantime, call us anytime at{" "}
-            <a href="tel:+18665206592" className="text-teal font-semibold hover:underline">(866) 520-6592</a>.
+            Thank you for applying to BoatDetailers.com. If we need anything to finalize your listing, we&apos;ll reach out. In the meantime, call us anytime at{" "}
+            <a href="tel:+18664504873" className="text-teal font-semibold hover:underline">(866) 450-4873</a>.
           </p>
           <div className="rounded-xl border border-navy/10 bg-navy/5 p-6 text-left mb-8">
             <div className="flex items-center gap-3 mb-4">
-              <Home className="h-5 w-5 text-teal flex-shrink-0" />
+              <Image src="/sailing-boat.svg" alt="" width={20} height={20} className="h-5 w-5 flex-shrink-0" />
               <p className="font-semibold text-navy text-sm">What happens next</p>
             </div>
             <ul className="space-y-2 text-sm text-muted">
@@ -35,7 +36,7 @@ export default function ThanksPage() {
             </ul>
           </div>
           <Link href="/" className="text-teal font-medium text-sm hover:underline">
-            ← Back to TopMortgageCompanies.com
+            ← Back to BoatDetailers.com
           </Link>
         </div>
       </Container>

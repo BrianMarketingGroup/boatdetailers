@@ -12,20 +12,20 @@ export default function TopBanner() {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-bold text-white leading-tight">
-                TopMortgageCompanies.com Has Been Acquired &amp; Redesigned in 2026.
+                BoatDetailers.com — The Premier Marine Detailing Directory, Launching 2026.
               </p>
               <p className="text-xs text-white/50 mt-0.5 leading-tight">
-                Completely rebuilt to better serve mortgage companies and the clients who need exceptional financing.{" "}
+                Built to connect boat owners with professional marine detailers across the country.{" "}
                 <span className="text-teal font-medium">All listings debut August 2026.</span>
               </p>
             </div>
           </div>
           <a
-            href="tel:+18665206592"
+            href="tel:+18664504873"
             className="flex-shrink-0 hidden sm:inline-flex items-center gap-2 border border-teal/40 text-teal text-sm font-semibold px-4 py-2 rounded-lg hover:bg-teal/10 transition-colors whitespace-nowrap"
           >
             <Phone className="h-3.5 w-3.5" />
-            (866) 520-6592
+            (866) 450-4873
           </a>
         </div>
       </Container>

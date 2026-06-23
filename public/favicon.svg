@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Teal rounded square background -->
-  <rect width="32" height="32" rx="7" fill="#10B981"/>
-  <!-- Lucide Shield icon (white), scaled to fit with padding -->
-  <g transform="translate(6, 5) scale(0.833)">
-    <path d="M12 2 L20 5.5 L20 13 C20 17.4 16.4 21.4 12 23 C7.6 21.4 4 17.4 4 13 L4 5.5 Z" fill="white" stroke="none"/>
-  </g>
-</svg>

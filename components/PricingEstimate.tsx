@@ -89,8 +89,8 @@ export default function PricingEstimate({
           {hasTaken && (
             <p className="text-xs text-red-600 mt-1">
               Featured is already claimed in some cities.{" "}
-              <a href="tel:+18665206592" className="font-medium underline hover:text-red-700">
-                Call us at (866) 520-6592
+              <a href="tel:+18664504873" className="font-medium underline hover:text-red-700">
+                Call us at (866) 450-4873
               </a>{" "}
               to discuss your options.
             </p>
@@ -106,7 +106,7 @@ export default function PricingEstimate({
       </div>
 
       <p className="text-xs text-muted">
-        Estimate shown for transparency. Call us at (866) 520-6592 if you have any questions.
+        Estimate shown for transparency. Call us at (866) 450-4873 if you have any questions.
       </p>
     </div>
   );

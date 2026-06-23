@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Trash2, Home, ChevronRight, ChevronLeft } from "lucide-react";
+import { Plus, Trash2, Anchor, ChevronRight, ChevronLeft } from "lucide-react";
 import { applySchema, type ApplyFormData } from "@/lib/schema";
 import { FormField, Input, Textarea, Select } from "./FormField";
 import CityCombobox from "./CityCombobox";
-import LoanProductSelect from "./LoanProductSelect";
+import ServicesSelect from "./ServicesSelect";
 import PricingEstimate from "./PricingEstimate";
 import Button from "./Button";
 import { getTrafficSource } from "./TrafficSourceTracker";
@@ -26,7 +26,7 @@ const US_STATES = [
   ["DC","District of Columbia"],
 ] as const;
 
-const STEP_TITLES = ["Company Details", "Contact Info", "Cities & Listing", "Billing"];
+const STEP_TITLES = ["Business Details", "Contact Info", "Cities & Services", "Billing"];
 
 const formatPhone = (val: string) => {
   const d = val.replace(/\D/g, "");
@@ -63,9 +63,8 @@ export default function ApplyForm() {
     resolver: zodResolver(applySchema),
     defaultValues: {
       type: "apply",
-      loanOfficers: [],
       locations: [{ city: "", state: "" }],
-      loanProducts: [],
+      services: [],
       featuredPlacement: true,
       excludedFeatured: [],
       assetPermission: undefined,
@@ -73,10 +72,9 @@ export default function ApplyForm() {
     mode: "onTouched",
   });
 
-  const { fields: officerFields, append: addOfficer, remove: removeOfficer } = useFieldArray({ control, name: "loanOfficers" });
   const { fields: locFields, append: addLocation, remove: removeLocation } = useFieldArray({ control, name: "locations" });
 
-  const watchedLoanProducts = watch("loanProducts");
+  const watchedServices = watch("services");
   const watchedLocations = watch("locations");
   const watchedFeatured = watch("featuredPlacement");
   const watchedExcluded = watch("excludedFeatured");
@@ -110,9 +108,9 @@ export default function ApplyForm() {
 
   async function goNext() {
     const stepFields: (keyof ApplyFormData)[][] = [
-      ["companyName", "companyPhone", "assetPermission"],
-      ["contactFirstName", "contactLastName", "email", "contactPhone", "plaqueShippingAddress", "plaqueShippingCity", "plaqueShippingState", "plaqueShippingZip"],
-      ["locations", "loanProducts"],
+      ["businessName", "businessPhone", "assetPermission"],
+      ["contactFirstName", "contactLastName", "email", "contactPhone"],
+      ["locations", "services"],
       ["cardNumber", "cardExpiry", "cardCvc", "cardName", "billingAddress", "billingCity", "billingState", "billingZip", "consentToTerms"],
     ];
     const valid = await trigger(stepFields[step - 1]);
@@ -155,12 +153,12 @@ export default function ApplyForm() {
     return (
       <div className="rounded-2xl border border-teal/30 bg-teal/5 p-10 text-center space-y-4">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal/20">
-          <Home className="h-8 w-8 text-teal" />
+          <Anchor className="h-8 w-8 text-teal" />
         </div>
         <h2 className="font-display text-2xl font-bold text-navy">Application Received!</h2>
         <p className="text-muted text-sm max-w-md mx-auto leading-relaxed">
           We&apos;ll reach out if we need anything to finalize your listing. Questions? Call us at:{" "}
-          <a href="tel:+18665206592" className="text-teal font-semibold hover:text-teal-dark">(866) 520-6592</a>
+          <a href="tel:+18664504873" className="text-teal font-semibold hover:text-teal-dark">(866) 450-4873</a>
         </p>
       </div>
     );
@@ -195,67 +193,29 @@ export default function ApplyForm() {
 
         <div className="p-6 sm:p-8">
 
-          {/* Step 1 */}
+          {/* Step 1 — Business Details */}
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Company Details</h2>
-                <p className="text-sm text-muted">Tell us about your mortgage company.</p>
+                <h2 className="font-display text-xl font-bold text-navy mb-1">Business Details</h2>
+                <p className="text-sm text-muted">Tell us about your marine detailing business.</p>
               </div>
 
-              <FormField label="Company Name" required error={errors.companyName?.message}>
-                <Input {...register("companyName")} error={errors.companyName?.message} placeholder="Summit Home Lending" />
+              <FormField label="Business Name" required error={errors.businessName?.message}>
+                <Input {...register("businessName")} error={errors.businessName?.message} placeholder="Coastal Marine Detailing" />
               </FormField>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormField label="Company Phone" required error={errors.companyPhone?.message}>
+                <FormField label="Business Phone" required error={errors.businessPhone?.message}>
                   <Input
-                    {...register("companyPhone")}
-                    onChange={(e) => { e.target.value = formatPhone(e.target.value); register("companyPhone").onChange(e); }}
-                    type="tel" error={errors.companyPhone?.message} placeholder="(555) 000-0000"
+                    {...register("businessPhone")}
+                    onChange={(e) => { e.target.value = formatPhone(e.target.value); register("businessPhone").onChange(e); }}
+                    type="tel" error={errors.businessPhone?.message} placeholder="(555) 000-0000"
                   />
                 </FormField>
-                <FormField label="Company Website" error={errors.website?.message}>
-                  <Input {...register("website")} error={errors.website?.message} placeholder="https://yourcompany.com" type="url" />
+                <FormField label="Business Website" error={errors.website?.message}>
+                  <Input {...register("website")} error={errors.website?.message} placeholder="https://yourbusiness.com" type="url" />
                 </FormField>
-              </div>
-
-              <FormField label="Company NMLS Number" hint="optional" error={errors.nmlsNumber?.message}>
-                <Input {...register("nmlsNumber")} error={errors.nmlsNumber?.message} placeholder="e.g. 1234567" />
-              </FormField>
-
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <p className="text-sm font-semibold text-navy">Loan Officers to List <span className="text-xs font-normal text-muted">(optional)</span></p>
-                    {officerFields.length === 0 && <p className="text-xs text-muted mt-0.5">Add individual loan officers you&apos;d like featured on your listing.</p>}
-                  </div>
-                  <button type="button" onClick={() => addOfficer({ name: "", nmls: "", description: "" })}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal hover:text-teal-dark border border-teal/30 hover:border-teal/60 bg-teal/5 hover:bg-teal/10 rounded-lg px-3 py-1.5 transition-all">
-                    <Plus className="h-3 w-3" /> Add Officer
-                  </button>
-                </div>
-                {officerFields.length > 0 && (
-                  <div className="space-y-4">
-                    {officerFields.map((field, i) => (
-                      <div key={field.id} className="rounded-xl border border-sky-dark bg-sky p-4 space-y-3 relative">
-                        <button type="button" onClick={() => removeOfficer(i)} className="absolute top-3 right-3 text-muted hover:text-red-500 transition-colors" aria-label="Remove officer">
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                        <p className="text-xs font-semibold text-muted uppercase tracking-wider">Loan Officer {i + 1}</p>
-                        <FormField label="Name" error={errors.loanOfficers?.[i]?.name?.message}>
-                          <Input {...register(`loanOfficers.${i}.name`)} error={errors.loanOfficers?.[i]?.name?.message} placeholder="Jane Smith" />
-                        </FormField>
-                        <FormField label="NMLS Number" hint="optional" error={errors.loanOfficers?.[i]?.nmls?.message}>
-                          <Input {...register(`loanOfficers.${i}.nmls`)} error={errors.loanOfficers?.[i]?.nmls?.message} placeholder="e.g. 9876543" />
-                        </FormField>
-                        <FormField label="Short Bio" hint="up to 500 characters, optional" error={errors.loanOfficers?.[i]?.description?.message}>
-                          <Textarea {...register(`loanOfficers.${i}.description`)} error={errors.loanOfficers?.[i]?.description?.message} rows={2} placeholder="15 years experience specializing in VA and FHA loans…" />
-                        </FormField>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
 
               <div>
@@ -267,7 +227,7 @@ export default function ApplyForm() {
                       <div>
                         {val === "grant" ? (
                           <>
-                            <p className="font-semibold text-sm text-navy">I grant TopMortgageCompanies.com permission</p>
+                            <p className="font-semibold text-sm text-navy">I grant BoatDetailers.com permission</p>
                             <p className="text-xs text-muted mt-0.5">to use photos, logos, and content from my website for my directory listing.</p>
                           </>
                         ) : (
@@ -285,67 +245,12 @@ export default function ApplyForm() {
             </div>
           )}
 
-          {/* Step 2 — Contact Info */}
-          {step === 2 && (
-            <div className="space-y-6">
-              <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Contact Information</h2>
-                <p className="text-sm text-muted">Your contact details for this listing.</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormField label="First Name" required error={errors.contactFirstName?.message}>
-                  <Input {...register("contactFirstName")} error={errors.contactFirstName?.message} placeholder="Jane" />
-                </FormField>
-                <FormField label="Last Name" required error={errors.contactLastName?.message}>
-                  <Input {...register("contactLastName")} error={errors.contactLastName?.message} placeholder="Smith" />
-                </FormField>
-              </div>
-              <FormField label="Title / Role" hint="optional" error={errors.contactTitle?.message}>
-                <Input {...register("contactTitle")} error={errors.contactTitle?.message} placeholder="Owner, Branch Manager, Loan Officer…" />
-              </FormField>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <FormField label="Email Address" required error={errors.email?.message}>
-                  <Input {...register("email")} type="email" error={errors.email?.message} placeholder="jane@yourcompany.com" />
-                </FormField>
-                <FormField label="Phone" required error={errors.contactPhone?.message}>
-                  <Input {...register("contactPhone")} onChange={(e) => { e.target.value = formatPhone(e.target.value); register("contactPhone").onChange(e); }} type="tel" error={errors.contactPhone?.message} placeholder="(555) 000-0000" />
-                </FormField>
-              </div>
-              <FormField label="Notes" hint="optional" error={errors.notes?.message}>
-                <Textarea {...register("notes")} error={errors.notes?.message} rows={3} placeholder="Anything else we should know about your listing?" />
-              </FormField>
-              <div className="pt-4 border-t border-sky-dark">
-                <h3 className="text-sm font-semibold text-navy mb-1">Complimentary Plaque Delivery</h3>
-                <p className="text-xs text-muted mb-4">Where should we ship your complimentary custom recognition plaque?</p>
-                <div className="space-y-5">
-                  <FormField label="Street Address" required error={errors.plaqueShippingAddress?.message}>
-                    <Input {...register("plaqueShippingAddress")} error={errors.plaqueShippingAddress?.message} placeholder="123 Main St, Suite 400" autoComplete="street-address" />
-                  </FormField>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    <FormField label="City" required error={errors.plaqueShippingCity?.message} className="sm:col-span-1">
-                      <Input {...register("plaqueShippingCity")} error={errors.plaqueShippingCity?.message} placeholder="Denver" autoComplete="address-level2" />
-                    </FormField>
-                    <FormField label="State" required error={errors.plaqueShippingState?.message}>
-                      <Select {...register("plaqueShippingState")} error={errors.plaqueShippingState?.message} autoComplete="address-level1">
-                        <option value="">State</option>
-                        {US_STATES.map(([code]) => <option key={code} value={code}>{code}</option>)}
-                      </Select>
-                    </FormField>
-                    <FormField label="ZIP Code" required error={errors.plaqueShippingZip?.message}>
-                      <Input {...register("plaqueShippingZip")} error={errors.plaqueShippingZip?.message} placeholder="80202" maxLength={10} inputMode="numeric" autoComplete="postal-code" />
-                    </FormField>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3 — Cities & Listing */}
+          {/* Step 3 — Cities & Services */}
           {step === 3 && (
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Listing Type</h2>
-                <p className="text-sm text-muted">Select your cities, loan product specialties, and listing type.</p>
+                <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Services</h2>
+                <p className="text-sm text-muted">Select your service cities, specialties, and listing type.</p>
               </div>
 
               <div>
@@ -393,12 +298,12 @@ export default function ApplyForm() {
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-navy mb-1">Loan Product Specialties <span className="text-red-500">*</span></p>
-                <p className="text-xs text-muted mb-3">Select all loan types your company offers. These appear on your listing and do not affect pricing.</p>
-                <LoanProductSelect
-                  value={watchedLoanProducts}
-                  onChange={(products) => setValue("loanProducts", products, { shouldValidate: true })}
-                  error={errors.loanProducts?.message as string}
+                <p className="text-sm font-semibold text-navy mb-1">Detailing Service Specialties <span className="text-red-500">*</span></p>
+                <p className="text-xs text-muted mb-3">Select all services your business offers. These appear on your listing and do not affect pricing.</p>
+                <ServicesSelect
+                  value={watchedServices}
+                  onChange={(services) => setValue("services", services, { shouldValidate: true })}
+                  error={errors.services?.message as string}
                 />
               </div>
 
@@ -416,7 +321,7 @@ export default function ApplyForm() {
                   />
                   <div>
                     <p className="font-semibold text-sm text-navy">Include Featured Listing</p>
-                    <p className="text-xs text-muted mt-0.5">Pins your company at the top of each city page. $689 first city, $345 each additional. Only 1 per city.</p>
+                    <p className="text-xs text-muted mt-0.5">Pins your business at the top of each city page. $689 first city, $345 each additional. Only 1 per city.</p>
                   </div>
                 </label>
               </div>
@@ -425,8 +330,39 @@ export default function ApplyForm() {
             </div>
           )}
 
+          {/* Step 2 — Contact Info */}
+          {step === 2 && (
+            <div className="space-y-6">
+              <div>
+                <h2 className="font-display text-xl font-bold text-navy mb-1">Contact Information</h2>
+                <p className="text-sm text-muted">Your contact details for this listing.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <FormField label="First Name" required error={errors.contactFirstName?.message}>
+                  <Input {...register("contactFirstName")} error={errors.contactFirstName?.message} placeholder="Jane" />
+                </FormField>
+                <FormField label="Last Name" required error={errors.contactLastName?.message}>
+                  <Input {...register("contactLastName")} error={errors.contactLastName?.message} placeholder="Smith" />
+                </FormField>
+              </div>
+              <FormField label="Title / Role" hint="optional" error={errors.contactTitle?.message}>
+                <Input {...register("contactTitle")} error={errors.contactTitle?.message} placeholder="Owner, Manager, Detailer…" />
+              </FormField>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <FormField label="Email Address" required error={errors.email?.message}>
+                  <Input {...register("email")} type="email" error={errors.email?.message} placeholder="jane@yourbusiness.com" />
+                </FormField>
+                <FormField label="Phone" required error={errors.contactPhone?.message}>
+                  <Input {...register("contactPhone")} onChange={(e) => { e.target.value = formatPhone(e.target.value); register("contactPhone").onChange(e); }} type="tel" error={errors.contactPhone?.message} placeholder="(555) 000-0000" />
+                </FormField>
+              </div>
+              <FormField label="Notes" hint="optional" error={errors.notes?.message}>
+                <Textarea {...register("notes")} error={errors.notes?.message} rows={3} placeholder="Anything else we should know about your listing?" />
+              </FormField>
+            </div>
+          )}
 
-          {/* Step 4 */}
+          {/* Step 4 — Billing */}
           {step === 4 && (
             <div className="space-y-6">
               <div>
@@ -451,11 +387,11 @@ export default function ApplyForm() {
                 </FormField>
                 <p className="text-xs font-semibold text-muted uppercase tracking-wider pt-2">Billing Address</p>
                 <FormField label="Street Address" required error={errors.billingAddress?.message}>
-                  <Input {...register("billingAddress")} error={errors.billingAddress?.message} placeholder="123 Main St" />
+                  <Input {...register("billingAddress")} error={errors.billingAddress?.message} placeholder="123 Marina Blvd" />
                 </FormField>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   <FormField label="City" required error={errors.billingCity?.message} className="col-span-2 sm:col-span-1">
-                    <Input {...register("billingCity")} error={errors.billingCity?.message} placeholder="Denver" />
+                    <Input {...register("billingCity")} error={errors.billingCity?.message} placeholder="Tampa" />
                   </FormField>
                   <FormField label="State" required error={errors.billingState?.message}>
                     <Select {...register("billingState")} error={errors.billingState?.message}>
@@ -464,7 +400,7 @@ export default function ApplyForm() {
                     </Select>
                   </FormField>
                   <FormField label="ZIP Code" required error={errors.billingZip?.message}>
-                    <Input {...register("billingZip")} error={errors.billingZip?.message} placeholder="80202" />
+                    <Input {...register("billingZip")} error={errors.billingZip?.message} placeholder="33601" />
                   </FormField>
                 </div>
               </div>

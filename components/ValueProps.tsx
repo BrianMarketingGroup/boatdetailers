@@ -1,27 +1,27 @@
-import { Building2, Globe, TrendingUp, Users } from "lucide-react";
+import { Eye, ShieldCheck, Star, Users } from "lucide-react";
 import Container from "./Container";
 import FadeIn from "./FadeIn";
 
 const props = [
   {
-    icon: Building2,
+    icon: Eye,
     heading: "Increase Visibility.",
-    body: "Get your mortgage company in front of homebuyers, homeowners, and investors actively searching for financing solutions in your city.",
+    body: "Get your boat detailing business in front of boat owners actively searching for cleaning, polishing, ceramic coatings, and marine appearance services in your city.",
   },
   {
-    icon: Globe,
-    heading: "Build Credibility.",
-    body: "A professional profile helps borrowers learn about your experience, loan programs, and service before deciding who to trust with one of the largest financial decisions of their lives.",
+    icon: ShieldCheck,
+    heading: "Build Trust & Credibility.",
+    body: "A professional profile helps prospective customers learn about your experience, attention to detail, and service offerings before deciding who to trust with their vessel.",
   },
   {
-    icon: TrendingUp,
-    heading: "Differentiate.",
-    body: "Showcase your specialties — conventional, FHA, VA, jumbo, refinancing, and more — and communicate what sets your company apart from the competition.",
+    icon: Star,
+    heading: "Differentiate Your Business.",
+    body: "Showcase your specialties, equipment, certifications, and what makes your marine detailing company stand out from the competition.",
   },
   {
     icon: Users,
-    heading: "Reach Every Stage.",
-    body: "Consumers compare multiple lenders before applying. A listing ensures your company is part of that research process from the very first search.",
+    heading: "Reach Customers at Every Stage.",
+    body: "Boat owners often research and compare multiple detailers before selecting a provider. A listing ensures your business is part of that decision-making process from the very first search.",
   },
 ];
 
@@ -32,13 +32,13 @@ export default function ValueProps() {
         <FadeIn>
           <div className="text-center mb-14">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-navy mb-4">
-              For Mortgage Companies. Built for Growth.
+              For Marine Detailers. Built for Growth.
             </h2>
             <div className="w-12 h-0.5 bg-teal mx-auto mb-5" />
             <p className="text-muted max-w-2xl mx-auto text-lg leading-relaxed">
-              TopMortgageCompanies.com is the new destination for mortgage company
-              recognition and borrower connection. Every company that applies is
-              listed and ready to be found.
+              BoatDetailers.com is the new destination for marine detailing
+              business recognition and customer connection. Every business that
+              applies is listed and ready to be found.
             </p>
           </div>
         </FadeIn>

@@ -3,7 +3,7 @@ import { IMAGES } from "./images";
 export interface PreviewCompany {
   id: number;
   name: string;
-  loanProducts: string[];
+  services: string[];
   rating: number;
   reviewCount: number;
   phone: string;
@@ -12,60 +12,55 @@ export interface PreviewCompany {
   imageUrl: string;
   featured?: boolean;
   rank?: number;
-  nmls?: string;
 }
 
 export const previewCompanies: PreviewCompany[] = [
   {
     id: 1,
-    name: "Summit Home Lending",
-    loanProducts: ["Conventional Loans", "Jumbo Loans", "Refinancing"],
+    name: "Coastal Marine Detailing",
+    services: ["Ceramic Coatings", "Gel Coat Restoration", "Full Boat Detailing"],
     rating: 5.0,
-    reviewCount: 218,
-    phone: "(303) 555-1200",
-    location: "Denver, CO",
-    servingArea: "Metro Denver & Front Range",
+    reviewCount: 184,
+    phone: "(813) 555-2200",
+    location: "Tampa, FL",
+    servingArea: "Tampa Bay & Gulf Coast",
     imageUrl: IMAGES.companyFeatured,
     featured: true,
-    nmls: "NMLS #1234567",
   },
   {
     id: 2,
-    name: "Patriot Mortgage Group",
-    loanProducts: ["VA Loans", "FHA Loans", "Conventional Loans"],
+    name: "BlueWave Boat Care",
+    services: ["Wash & Wax Services", "Teak Cleaning & Restoration", "Interior Detailing"],
     rating: 4.9,
-    reviewCount: 312,
-    phone: "(303) 444-8800",
-    location: "Denver, CO",
-    servingArea: "Serving Metro Denver",
+    reviewCount: 247,
+    phone: "(813) 444-7700",
+    location: "Tampa, FL",
+    servingArea: "Serving Tampa Bay",
     imageUrl: IMAGES.companyOne,
     rank: 1,
-    nmls: "NMLS #2345678",
   },
   {
     id: 3,
-    name: "Greenfield Mortgage Solutions",
-    loanProducts: ["FHA Loans", "USDA Loans", "Conventional Loans"],
+    name: "Precision Marine Services",
+    services: ["Paint Correction", "Ceramic Coatings", "Yacht Detailing"],
     rating: 4.8,
-    reviewCount: 187,
-    phone: "(303) 310-5500",
-    location: "Denver, CO",
-    servingArea: "Serving Metro Denver",
+    reviewCount: 163,
+    phone: "(813) 310-4400",
+    location: "Tampa, FL",
+    servingArea: "Serving Tampa Bay",
     imageUrl: IMAGES.companyTwo,
     rank: 2,
-    nmls: "NMLS #3456789",
   },
   {
     id: 4,
-    name: "Apex Capital Lending",
-    loanProducts: ["Investment Property Loans", "Commercial Mortgages", "Jumbo Loans"],
+    name: "Harbor Shine Detailing",
+    services: ["Mobile & Dockside Detailing", "Gel Coat Restoration", "Metal Polishing"],
     rating: 4.7,
-    reviewCount: 143,
-    phone: "(303) 555-9900",
-    location: "Denver, CO",
-    servingArea: "Serving Metro Denver",
+    reviewCount: 119,
+    phone: "(813) 555-8800",
+    location: "Tampa, FL",
+    servingArea: "Serving Tampa Bay",
     imageUrl: IMAGES.companyThree,
     rank: 3,
-    nmls: "NMLS #4567890",
   },
 ];

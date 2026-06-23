@@ -21,8 +21,8 @@ export default function AwardsDinner() {
                     Limited Time: Apply Today
                   </div>
                   <Image
-                    src="/top-awards-mortage.png.png"
-                    alt="Top Mortgage Companies 2027 Recognition Award Plaque"
+                    src="/awards.png"
+                    alt="Boat Detailers Recognition Awards 2027 Plaque"
                     width={600}
                     height={720}
                     className="rounded-2xl shadow-2xl w-full h-auto"
@@ -45,10 +45,10 @@ export default function AwardsDinner() {
             </h2>
 
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Every listed company receives a custom recognition plaque and an
+              Every listed business receives a custom recognition plaque and an
               invitation to the Annual Awards &amp; Recognition Event in Summer
               2027 — a night of peer recognition, networking, and celebration of
-              every listed company on TopMortgageCompanies.com.
+              every listed business on BoatDetailers.com.
             </p>
 
             <div className="space-y-4 mb-10">
@@ -80,11 +80,11 @@ export default function AwardsDinner() {
                 Learn More
               </Button>
               <a
-                href="tel:+18665206592"
+                href="tel:+18664504873"
                 className="inline-flex items-center gap-2.5 rounded-lg border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white/80 hover:text-teal hover:border-teal/50 hover:bg-teal/10 transition-colors"
               >
                 <Phone className="h-4 w-4 text-teal" />
-                (866) 520-6592
+                (866) 450-4873
               </a>
             </div>
           </FadeIn>

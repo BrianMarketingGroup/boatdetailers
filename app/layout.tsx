@@ -21,20 +21,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "TopMortgageCompanies.com — Get Your Mortgage Company Listed",
-    template: "%s | TopMortgageCompanies.com",
+    default: "BoatDetailers.com — Get Your Marine Detailing Business Listed",
+    template: "%s | BoatDetailers.com",
   },
   description:
-    "The premier directory of top-rated mortgage companies nationwide. Get your company listed and reach homebuyers, homeowners, and investors actively searching for financing solutions.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://topmortgagecompanies.com"),
+    "The premier directory of professional boat detailing businesses nationwide. Get listed and reach boat owners actively searching for cleaning, polishing, ceramic coatings, and marine appearance services.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://boatdetailers.com"),
   icons: {
-    icon: "/money.svg",
-    shortcut: "/money.svg",
-    apple: "/money.svg",
+    icon: "/sailing-boat.svg",
+    shortcut: "/sailing-boat.svg",
+    apple: "/sailing-boat.svg",
   },
   openGraph: {
     type: "website",
-    siteName: "TopMortgageCompanies.com",
+    siteName: "BoatDetailers.com",
   },
 };
 

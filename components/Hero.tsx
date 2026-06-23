@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Home } from "lucide-react";
+import { Anchor } from "lucide-react";
 import Button from "./Button";
 import Container from "./Container";
 import FadeIn from "./FadeIn";
@@ -27,29 +27,29 @@ export default function Hero() {
           {/* Left: headline */}
           <FadeIn direction="left">
             <div className="inline-flex items-center gap-2 rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 mb-6">
-              <Home className="h-3.5 w-3.5 text-teal" />
+              <Anchor className="h-3.5 w-3.5 text-teal" />
               <span className="text-xs font-semibold text-teal uppercase tracking-widest">
                 Applications Open — 2026/2027 Listings
               </span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
-              Get Your Company
+              Get Your Business
               <br />
               <span className="text-teal">In Front of</span>
               <br />
-              More Borrowers.
+              More Boat Owners.
             </h1>
 
             <p className="text-lg text-white/70 max-w-xl mb-8 leading-relaxed">
-              TopMortgageCompanies.com is the premier directory connecting
-              homebuyers, homeowners, and investors with top-rated mortgage
-              companies across the country.
+              BoatDetailers.com is the premier directory connecting boat owners
+              with professional marine detailing businesses — from ceramic
+              coatings and gel coat restoration to full yacht detailing.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <Button href="/apply" variant="primary" size="lg">
-                Get Your Company Listed
+                Get Your Business Listed
               </Button>
               <Button href="/how-it-works" variant="outline-light" size="lg">
                 Learn More
@@ -67,7 +67,7 @@ export default function Hero() {
                   <div className="relative h-[480px] w-full">
                     <Image
                       src={IMAGES.heroPortrait}
-                      alt="Top-rated mortgage professional"
+                      alt="Professional boat detailer at work"
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       priority
@@ -77,7 +77,7 @@ export default function Hero() {
 
                   <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
                     <p className="text-sm text-white/70 leading-relaxed max-w-sm">
-                      Build credibility with a professional profile that highlights your loan products, specialties, and customer service.
+                      Build credibility with a professional profile that showcases your specialties, certifications, and the quality of your work.
                     </p>
                   </div>
                 </div>

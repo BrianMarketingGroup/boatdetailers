@@ -5,14 +5,15 @@ import FadeIn from "./FadeIn";
 import { PRICING, formatCurrency } from "@/lib/pricing";
 
 const LISTING_FEATURES = [
-  "Full company profile with logo & description",
-  "Listed by city and loan product specialties",
-  "Contact details, NMLS number & website link",
-  "TopMortgageCompanies.com verified badge for your website",
-  "Complimentary custom recognition plaque",
-  "Invitation to the Annual Awards & Recognition Event",
+  "Full business profile with photos & description",
+  "Listed by city and detailing service specialties",
+  "Contact details, website link & social media",
+  "BoatDetailers.com verified badge for your website",
   "Pre-launch special: balance of 2026 + all of 2027",
-  "Reach borrowers actively searching in your market",
+  "Reach boat owners actively searching in your market",
+  "Showcase vessel types you specialize in",
+  "Highlight certifications and product brands used",
+  "Invitation to the Annual Awards & Recognition Event",
 ];
 
 export default function Pricing() {
@@ -50,7 +51,7 @@ export default function Pricing() {
                 {[
                   {
                     label: "Basic listing",
-                    sub: "Per city — includes all loan product specialties",
+                    sub: "Per city — includes all detailing service specialties",
                     price: PRICING.basicPerCity,
                     color: "text-navy",
                     prefix: "",
@@ -100,7 +101,7 @@ export default function Pricing() {
               </ul>
 
               <Button href="/apply" variant="secondary" size="md" className="w-full">
-                Submit Your Company Profile
+                Submit Your Business Profile
               </Button>
             </div>
           </FadeIn>
@@ -112,11 +113,11 @@ export default function Pricing() {
           </p>
           <div className="flex justify-center mt-6">
             <a
-              href="tel:+18665206592"
+              href="tel:+18664504873"
               className="inline-flex items-center gap-2.5 rounded-lg border border-navy/20 bg-sky px-5 py-3 text-sm font-semibold text-navy hover:bg-sky-dark hover:border-teal/50 transition-colors"
             >
               <Phone className="h-4 w-4 text-teal" />
-              Questions? Call&nbsp;<span className="text-teal">(866) 520-6592</span>
+              Questions? Call&nbsp;<span className="text-teal">(866) 450-4873</span>
             </a>
           </div>
         </FadeIn>
