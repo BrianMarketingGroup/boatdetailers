@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 import { detailingServices } from "@/content/services";
 
 export const metadata: Metadata = {
-  title: "Our Services",
+  title: "Highlighted Services",
   description: "Browse the marine detailing service specialties available on BoatDetailers.com — from wash & wax and ceramic coatings to gel coat restoration and yacht detailing.",
 };
 

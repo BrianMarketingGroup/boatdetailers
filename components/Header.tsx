@@ -10,7 +10,7 @@ import Button from "./Button";
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/how-it-works", label: "How It Works" },
-  { href: "/services", label: "Our Services" },
+  { href: "/services", label: "Highlighted Services" },
   { href: "/contact", label: "Contact" },
 ];
 

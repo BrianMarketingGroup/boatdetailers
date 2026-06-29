@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2, Anchor, ChevronRight, ChevronLeft } from "lucide-react";
@@ -67,7 +67,7 @@ export default function ApplyForm() {
       services: [],
       featuredPlacement: true,
       excludedFeatured: [],
-      assetPermission: undefined,
+      assetPermission: "grant",
     },
     mode: "onTouched",
   });
@@ -110,14 +110,20 @@ export default function ApplyForm() {
     const stepFields: (keyof ApplyFormData)[][] = [
       ["businessName", "businessPhone", "assetPermission"],
       ["contactFirstName", "contactLastName", "email", "contactPhone"],
-      ["locations", "services"],
+      ["locations"],
       ["cardNumber", "cardExpiry", "cardCvc", "cardName", "billingAddress", "billingCity", "billingState", "billingZip", "consentToTerms"],
     ];
     const valid = await trigger(stepFields[step - 1]);
-    if (valid) setStep((s) => Math.min(s + 1, 4));
+    if (valid) {
+      setStep((s) => Math.min(s + 1, 4));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
 
-  function goBack() { setStep((s) => Math.max(s - 1, 1)); }
+  function goBack() {
+    setStep((s) => Math.max(s - 1, 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   function toggleFeatured(key: string) {
     const current = getValues("excludedFeatured") ?? [];
@@ -249,31 +255,20 @@ export default function ApplyForm() {
           {step === 3 && (
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-xl font-bold text-navy mb-1">Cities & Services</h2>
-                <p className="text-sm text-muted">Select your service cities, specialties, and listing type.</p>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-sm font-semibold text-navy">Cities <span className="text-red-500">*</span></p>
-                  <button type="button" onClick={() => addLocation({ city: "", state: "" })} className="inline-flex items-center gap-1 text-xs font-medium text-teal hover:text-teal-dark transition-colors">
-                    <Plus className="h-3 w-3" /> Add City
-                  </button>
-                </div>
-                <div className="space-y-3">
-                  {locFields.map((field, i) => {
-                    const stateVal = watch(`locations.${i}.state`) ?? "";
-                    const lockedCities = (watchedLocations ?? []).filter((l, j) => j !== i && !!l.city && l.state === stateVal).map((l) => l.city);
-                    return (
-                      <div key={field.id} className="flex items-start gap-3">
+                {locFields.map((field, i) => {
+                  const stateVal = watch(`locations.${i}.state`) ?? "";
+                  const lockedCities = (watchedLocations ?? []).filter((l, j) => j !== i && !!l.city && l.state === stateVal).map((l) => l.city);
+                  return (
+                    <Fragment key={field.id}>
+                      <div className={`flex items-start gap-3${i > 0 ? " mt-3" : ""}`}>
                         <div className="flex-1 grid grid-cols-1 min-[400px]:grid-cols-2 gap-3">
-                          <FormField label={i === 0 ? "State" : ""} required={i === 0} error={errors.locations?.[i]?.state?.message}>
-                            <Select {...register(`locations.${i}.state`)} onChange={(e) => { register(`locations.${i}.state`).onChange(e); setValue(`locations.${i}.city`, ""); }} error={errors.locations?.[i]?.state?.message}>
+                          <FormField label="" error={errors.locations?.[i]?.state?.message}>
+                            <Select {...register(`locations.${i}.state`)} autoComplete="off" onChange={(e) => { register(`locations.${i}.state`).onChange(e); setValue(`locations.${i}.city`, ""); }} error={errors.locations?.[i]?.state?.message}>
                               <option value="">Select state</option>
                               {US_STATES.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
                             </Select>
                           </FormField>
-                          <FormField label={i === 0 ? "City" : ""} required={i === 0} error={errors.locations?.[i]?.city?.message}>
+                          <FormField label="" error={errors.locations?.[i]?.city?.message}>
                             <CityCombobox
                               state={stateVal}
                               value={watch(`locations.${i}.city`)}
@@ -287,18 +282,25 @@ export default function ApplyForm() {
                           </FormField>
                         </div>
                         {locFields.length > 1 && (
-                          <button type="button" onClick={() => removeLocation(i)} className={`text-muted hover:text-red-500 transition-colors flex-shrink-0 ${i === 0 ? "mt-7" : "mt-1"}`} aria-label="Remove city">
+                          <button type="button" onClick={() => removeLocation(i)} className="text-muted hover:text-red-500 transition-colors flex-shrink-0 mt-1" aria-label="Remove city">
                             <Trash2 className="h-4 w-4" />
                           </button>
                         )}
                       </div>
-                    );
-                  })}
-                </div>
+                    </Fragment>
+                  );
+                })}
+                <button
+                  type="button"
+                  onClick={() => addLocation({ city: "", state: "" })}
+                  className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-teal px-5 py-2.5 text-sm font-bold text-teal hover:bg-teal hover:text-white transition-all"
+                >
+                  <Plus className="h-4 w-4" /> Add Another City
+                </button>
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-navy mb-1">Detailing Service Specialties <span className="text-red-500">*</span></p>
+                <p className="text-sm font-semibold text-navy mb-1">Detailing Service Specialties <span className="text-muted font-normal text-xs">(optional)</span></p>
                 <p className="text-xs text-muted mb-3">Select all services your business offers. These appear on your listing and do not affect pricing.</p>
                 <ServicesSelect
                   value={watchedServices}
@@ -321,7 +323,7 @@ export default function ApplyForm() {
                   />
                   <div>
                     <p className="font-semibold text-sm text-navy">Include Featured Listing</p>
-                    <p className="text-xs text-muted mt-0.5">Pins your business at the top of each city page. $689 first city, $345 each additional. Only 1 per city.</p>
+                    <p className="text-xs text-muted mt-0.5">Pins your business at the top of each city page. Only 1 featured listing available per city.</p>
                   </div>
                 </label>
               </div>

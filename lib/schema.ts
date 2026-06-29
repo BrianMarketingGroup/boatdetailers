@@ -26,9 +26,9 @@ export const applySchema = z.object({
     .min(1, "Add at least one city"),
   services: z
     .array(z.string())
-    .min(1, "Select at least one service")
+    .default([])
     .refine(
-      (items) => items.every((s) => allServiceLabels.includes(s)),
+      (items) => items.every((s) => allServiceLabels.includes(s) || s === "All Specialties and Services"),
       "Invalid service"
     ),
   featuredPlacement: z.boolean().default(true),

@@ -25,7 +25,7 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { type: "contact" },
+    defaultValues: { type: "contact", consentToContact: true },
   });
 
   async function onSubmit(data: ContactFormData) {
@@ -98,7 +98,7 @@ export default function ContactForm() {
         <label className="flex items-start gap-3 cursor-pointer">
           <input type="checkbox" {...register("consentToContact")} className="mt-0.5 h-4 w-4 rounded accent-teal flex-shrink-0" />
           <span className="text-sm text-muted leading-snug">
-            I consent to being contacted by the BoatDetailers.com team by email and phone regarding my inquiry.
+            I consent to being contacted by the BoatDetailers.com team regarding my inquiry, and agree to receive marketing communications via email or SMS. Reply STOP to opt out at any time.
           </span>
         </label>
         {errors.consentToContact && (

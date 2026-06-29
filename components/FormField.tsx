@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { ChevronDown } from "lucide-react";
 
 interface FormFieldProps {
-  label: string;
+  label?: string;
   required?: boolean;
   error?: string;
   hint?: string;
@@ -14,11 +14,13 @@ interface FormFieldProps {
 export function FormField({ label, required, error, hint, children, className }: FormFieldProps) {
   return (
     <div className={clsx("flex flex-col gap-1.5", className)}>
-      <label className="text-sm font-semibold text-navy">
-        {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
-        {hint && <span className="ml-2 text-xs font-normal text-muted">({hint})</span>}
-      </label>
+      {label && (
+        <label className="text-sm font-semibold text-navy">
+          {label}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
+          {hint && <span className="ml-2 text-xs font-normal text-muted">({hint})</span>}
+        </label>
+      )}
       {children}
       {error && (
         <p className="text-xs text-red-600" role="alert">{error}</p>

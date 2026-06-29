@@ -33,11 +33,12 @@ export default function PricingEstimate({
       : [];
 
   const hasTaken = featuredGrid.some((r) => r.taken);
+  const activeFeaturedCount = featuredGrid.filter((r) => !r.taken && !r.excluded).length;
 
   return (
     <div className="rounded-xl border border-teal/30 bg-navy/5 p-5 space-y-4">
       <p className="text-xs font-semibold text-navy uppercase tracking-widest">
-        Estimated Quote
+        Quote
       </p>
 
       {lineItems.length > 0 && (
@@ -54,36 +55,51 @@ export default function PricingEstimate({
       {featuredGrid.length > 0 && (
         <div className="border-t border-teal/20 pt-4 space-y-2">
           <p className="text-xs font-semibold text-navy">
-            Featured Listing — {formatCurrency(PRICING.featuredFirstCity)} first city / {formatCurrency(PRICING.featuredAdditionalCity)} additional
+            Featured Listing —{" "}
+            {activeFeaturedCount > 1
+              ? `${formatCurrency(PRICING.featuredFirstCity)} first city / ${formatCurrency(PRICING.featuredAdditionalCity)} each additional`
+              : `${formatCurrency(PRICING.featuredFirstCity)} per city`}
           </p>
           <p className="text-xs text-muted">Uncheck any cities you don&apos;t want featured.</p>
           <div className="space-y-1.5">
-            {featuredGrid.map((row) => (
-              <label
-                key={row.key}
-                className={`flex items-center gap-2.5 text-sm cursor-pointer rounded-lg px-3 py-2 transition-colors ${
-                  row.taken
-                    ? "opacity-50 cursor-not-allowed bg-red-50"
-                    : row.excluded
-                    ? "text-muted"
-                    : "text-navy hover:bg-teal/5"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={!row.excluded && !row.taken}
-                  disabled={row.taken}
-                  onChange={() => !row.taken && onToggleFeatured(row.key)}
-                  className="h-4 w-4 rounded accent-teal flex-shrink-0"
-                />
-                <span className={row.excluded || row.taken ? "line-through" : ""}>
-                  {row.label}
-                </span>
-                {row.taken && (
-                  <span className="ml-auto text-xs text-red-500 font-medium">Unavailable</span>
-                )}
-              </label>
-            ))}
+            {featuredGrid.map((row) =>
+              row.taken ? (
+                <div
+                  key={row.key}
+                  className="flex items-start gap-2.5 rounded-lg px-3 py-2.5 bg-red-50 border border-red-100"
+                >
+                  <input
+                    type="checkbox"
+                    checked={false}
+                    disabled
+                    aria-label={`${row.label} — featured slot taken`}
+                    className="mt-0.5 h-4 w-4 rounded flex-shrink-0 opacity-40"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm line-through text-muted">{row.label}</p>
+                    <p className="text-xs text-muted mt-0.5">Basic listing still available</p>
+                  </div>
+                  <span className="flex-shrink-0 text-xs font-semibold text-red-700 bg-red-100 border border-red-200 rounded px-2 py-0.5 whitespace-nowrap">
+                    Featured Taken
+                  </span>
+                </div>
+              ) : (
+                <label
+                  key={row.key}
+                  className={`flex items-center gap-2.5 text-sm cursor-pointer rounded-lg px-3 py-2 transition-colors ${
+                    row.excluded ? "text-muted" : "text-navy hover:bg-teal/5"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={!row.excluded}
+                    onChange={() => onToggleFeatured(row.key)}
+                    className="h-4 w-4 rounded accent-teal flex-shrink-0"
+                  />
+                  <span className={row.excluded ? "line-through" : ""}>{row.label}</span>
+                </label>
+              )
+            )}
           </div>
 
           {hasTaken && (
@@ -99,15 +115,11 @@ export default function PricingEstimate({
       )}
 
       <div className="pt-3 border-t border-teal/20 flex justify-between items-center">
-        <span className="font-semibold text-navy">Estimated total</span>
+        <span className="font-semibold text-navy">Total</span>
         <span className="font-display text-2xl font-bold text-teal">
           {formatCurrency(total)}
         </span>
       </div>
-
-      <p className="text-xs text-muted">
-        Estimate shown for transparency. Call us at (866) 450-4873 if you have any questions.
-      </p>
     </div>
   );
 }

@@ -9,11 +9,9 @@ const LISTING_FEATURES = [
   "Listed by city and detailing service specialties",
   "Contact details, website link & social media",
   "BoatDetailers.com verified badge for your website",
-  "Pre-launch special: balance of 2026 + all of 2027",
   "Reach boat owners actively searching in your market",
   "Showcase vessel types you specialize in",
   "Highlight certifications and product brands used",
-  "Invitation to the Annual Awards & Recognition Event",
 ];
 
 export default function Pricing() {
@@ -60,13 +58,6 @@ export default function Pricing() {
                     label: "Featured Listing — first city",
                     sub: "Top position above all ranked listings — 1 per city",
                     price: PRICING.featuredFirstCity,
-                    color: "text-teal",
-                    prefix: "+",
-                  },
-                  {
-                    label: "Featured Listing — each additional city",
-                    sub: "50% off for every city after the first",
-                    price: PRICING.featuredAdditionalCity,
                     color: "text-teal",
                     prefix: "+",
                   },

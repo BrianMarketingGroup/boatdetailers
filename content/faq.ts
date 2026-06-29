@@ -12,12 +12,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "What does a listing cost?",
     answer:
-      "$289 per city for a basic listing. Featured placement — which pins your business at the top of your city page above all other listings — is an additional $689 for your first city and 50% off ($345) for each additional city. Pricing is for a 12-month annual listing.",
+      "$289 per city for a basic listing. Featured placement — which pins your business at the top of your city page above all other listings — is an additional $689 per city. Pricing is for a 12-month annual listing.",
   },
   {
     question: "When will my listing go live?",
     answer:
-      "The directory launches in August 2026. All listings debut simultaneously, so every business that applies now will be live from day one. Businesses applying during the pre-launch period receive the balance of 2026 plus all of 2027.",
+      "The directory launches in August 2026. All listings debut simultaneously, so every business that applies now will be live from day one. Each listing is for 12 months from the launch date.",
   },
   {
     question: "What is a Featured Listing?",
@@ -27,7 +27,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Can I be listed in multiple cities?",
     answer:
-      "Yes. You can add as many cities as you serve. Each city is billed separately at $289/year. If you add Featured placement, the upgrade is $689 for your first city and $345 for each additional city.",
+      "Yes. You can add as many cities as you serve. Each city is billed separately at $289/year. Featured placement is available per city for an additional fee.",
   },
   {
     question: "What services can I highlight?",
@@ -42,7 +42,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "What is the pre-launch special?",
     answer:
-      "Businesses that apply before the August 2026 launch receive the balance of 2026 plus all of 2027 — so you're not paying a full year for just a few months. This is the best time to apply and secure your Featured placement before your market fills up.",
+      "Businesses that apply before our August 2026 launch are eligible to receive 50% off all listings. This limited-time offer provides the same recognition, benefits, and visibility at a reduced prelaunch rate.",
   },
   {
     question: "Can I cancel my listing?",
@@ -58,11 +58,6 @@ export const faqItems: FaqItem[] = [
     question: "What types of vessels can I list specialties for?",
     answer:
       "You can highlight any vessel types you service — center consoles, sportfishing boats, cruisers, yachts, sailboats, pontoons, personal watercraft, and more. Your profile communicates exactly what you specialize in.",
-  },
-  {
-    question: "What is the Annual Awards & Recognition Event?",
-    answer:
-      "Every listed business is invited to the Annual BoatDetailers.com Awards & Recognition Event in Summer 2027 — an exclusive evening celebrating the best in marine detailing. Details will be sent to all listed businesses closer to the event.",
   },
 ];
 

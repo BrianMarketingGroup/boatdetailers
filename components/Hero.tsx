@@ -29,7 +29,7 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2 rounded-full border border-teal/40 bg-teal/10 px-4 py-1.5 mb-6">
               <Anchor className="h-3.5 w-3.5 text-teal" />
               <span className="text-xs font-semibold text-teal uppercase tracking-widest">
-                Applications Open — 2026/2027 Listings
+                Applications Open — 2026 Listings
               </span>
             </div>
 

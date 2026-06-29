@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
 import Container from "@/components/Container";
-import Faq from "@/components/Faq";
 import FadeIn from "@/components/FadeIn";
 import Button from "@/components/Button";
-import { howItWorksFaqItems } from "@/content/faq";
 
 export const metadata: Metadata = {
   title: "How It Works",
@@ -16,7 +14,7 @@ const steps = [
     num: "01",
     title: "Tell Us About Your Business",
     description:
-      "Tell us about your detailing business, the services you offer, and the cities you serve. The profile submission takes about 5 minutes and includes a transparent pricing estimate.",
+      "Tell us about your detailing business, the services you offer, and the cities you serve. The profile submission takes about 5 minutes and includes transparent pricing.",
   },
   {
     num: "02",
@@ -30,12 +28,6 @@ const steps = [
     description:
       "Your listing debuts in August 2026 alongside all listed businesses — a coordinated national launch with press coverage and boat owner awareness campaigns.",
   },
-  {
-    num: "04",
-    title: "Be Recognized",
-    description:
-      "Display the BoatDetailers.com 2027 verified badge on your own website and receive your invitation to the Annual Awards & Recognition Event in Summer 2027.",
-  },
 ];
 
 export default function HowItWorksPage() {
@@ -47,7 +39,7 @@ export default function HowItWorksPage() {
           <p className="text-xs font-semibold text-teal uppercase tracking-widest mb-3">The Process</p>
           <h1 className="font-display text-3xl sm:text-4xl font-bold text-white mb-3">How It Works</h1>
           <p className="text-white/70 text-lg max-w-lg leading-relaxed mx-auto">
-            Four steps from submission to recognition. The process is simple — we handle the rest.
+            Three steps from submission to going live. The process is simple — we handle the rest.
           </p>
         </Container>
       </div>
@@ -110,7 +102,6 @@ export default function HowItWorksPage() {
                       "Listed by city and detailing service specialties",
                       "Contact details & website link",
                       "BoatDetailers.com verified badge for your website",
-                      "Pre-launch special: balance of 2026 + all of 2027",
                     ].map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm text-muted">
                         <span className="text-teal font-bold mt-0.5">✓</span>
@@ -165,11 +156,6 @@ export default function HowItWorksPage() {
             </div>
           </FadeIn>
 
-          {/* FAQ */}
-          <FadeIn>
-            <h2 className="font-display text-2xl font-bold text-navy mb-8 text-center">Common Questions</h2>
-            <Faq items={howItWorksFaqItems} />
-          </FadeIn>
         </div>
       </Container>
     </div>
