@@ -22,6 +22,21 @@
 
   /* Border radius */
   --radius-2xl: 1rem;
+
+  /* Checkout wizard aliases (components/checkout/**) — map the wizard's
+     generic token names onto this site's own navy/teal/sky tokens rather
+     than duplicating a second color system. */
+  --color-primary: var(--color-navy);
+  --color-primary-light: var(--color-navy-light);
+  --color-primary-dark: var(--color-navy-dark);
+  --color-accent: var(--color-teal);
+  --color-accent-light: var(--color-teal-light);
+  --color-accent-dark: var(--color-teal-dark);
+  --color-bg: var(--color-sky);
+  --color-card: #ffffff;
+  --color-border: var(--color-sky-dark);
+  --color-success: #1f8a54;
+  --color-danger: #c0392b;
 }
 
 *,

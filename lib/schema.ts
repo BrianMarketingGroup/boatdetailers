@@ -67,6 +67,19 @@ export const applySchema = z.object({
     errorMap: () => ({ message: "You must agree to the terms to continue" }),
   }),
 
+  // Added for the checkout-wizard integration — "Complete Now" vs "Email Me
+  // a Link to Complete Later". All optional so existing non-wizard callers
+  // (if any) keep working unchanged.
+  listingChoice: z.enum(["now", "later"]).optional(),
+  listingBio: z.string().optional(),
+  listingHours: z.any().optional(),
+  sameAsBilling: z.boolean().optional(),
+  businessAddress: z
+    .object({ street: z.string(), city: z.string(), state: z.string(), zip: z.string() })
+    .nullable()
+    .optional(),
+  keyStaff: z.array(z.string()).optional(),
+
   _honeypot: z.string().max(0, "Bot detected").optional(),
 });
 
