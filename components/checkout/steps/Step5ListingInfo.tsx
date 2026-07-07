@@ -56,9 +56,13 @@ export default function Step5ListingInfo({ config }: { config: SiteConfig }) {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => null);
-        setSubmitError(
-          body?.error ?? "Something went wrong submitting your application. Please try again.",
-        );
+        // Some sites' /api/apply returns a structured Zod error object
+        // (not a string) on 422 — never render that object directly.
+        const message =
+          typeof body?.error === "string"
+            ? body.error
+            : "Something went wrong submitting your application. Please try again.";
+        setSubmitError(message);
         return;
       }
       store.setListingChoice(choice);
